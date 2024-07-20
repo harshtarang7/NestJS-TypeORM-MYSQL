@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # NestJS-TypeORM-MYSQL
 A boiler plate for NestJS-TypeORM-MYSQL
 =======
@@ -75,4 +75,4 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
->>>>>>> f1d703fd44e829d86676d455ec009cf2aca09e7c
+
