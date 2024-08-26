@@ -19,7 +19,7 @@ export class PetOwner {
   owner_city: string;
 
   @Column({ type: 'int', nullable: false })
-  pet_own: number;
+  pet_info_id: number;
 
   @Column({ type: 'tinyint', default: 1 })
   active: boolean;
@@ -28,6 +28,6 @@ export class PetOwner {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: 'pet_own' })
+  @JoinColumn({ name: 'pet_info_id' })
   pet: PetInfo;
 }

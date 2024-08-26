@@ -20,7 +20,7 @@ export class PetInfo {
   pet_name: string;
 
   @Column({ type: 'int', nullable: false })
-  owner_id: number;
+  pet_owner_id: number;
 
   @Column({ type: 'datetime', nullable: false })
   birthdate: Date;
@@ -39,6 +39,6 @@ export class PetInfo {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: 'owner_id' })
+  @JoinColumn({ name: 'pet_owner_id' })
   owner: PetOwner;
 }
