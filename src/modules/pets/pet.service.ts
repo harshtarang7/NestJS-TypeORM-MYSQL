@@ -4,6 +4,7 @@ import { PetCategory } from '../../models/pet.category.entity';
 import { Repository } from 'typeorm';
 import { PetInfo } from '../../models/pet.info.entity';
 import { PetOwner } from '../../models/pet.owner.entity';
+import { NoDataFound } from 'src/common/error.response';
 
 @Injectable()
 export class PetService {
@@ -19,8 +20,22 @@ export class PetService {
   async getAllPets(): Promise<PetInfo[]> {
     try {
       const allPets = await this.petInfoRepository.find();
+      if (!allPets) {
+        throw new NoDataFound('no data found of pet info');
+      }
       return allPets;
     } catch (error) {
+      throw error;
+    }
+  }
+
+  async AddPetCategory(categoryName: string): Promise<PetCategory> {
+    try {
+      const newCategory = new PetCategory();
+      newCategory.category_name = categoryName;
+      return await this.petCategoryRepository.save(newCategory);
+    } catch (error) {
+      console.log(error);
       throw error;
     }
   }
