@@ -39,4 +39,18 @@ export class PetService {
       throw error;
     }
   }
+
+  async fetchPetOwnerById(ownerId: number): Promise<PetOwner> {
+    try {
+      const petOwner = await this.petOwnerRepository.findOne({
+        where: { owner_id: ownerId },
+      });
+      if (!petOwner) {
+        throw new NoDataFound('no data found with this owner id');
+      }
+      return petOwner;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

@@ -5,6 +5,8 @@ import { SuccessResponse } from 'src/common/success.response';
 import { ErrorResponse, NoDataFound } from 'src/common/error.response';
 import { PetCategoryRequestDTo } from './dto/pet.category.dto';
 import { PetCategory } from 'src/models/pet.category.entity';
+import { FetchPetOwnerIdRequestDTO } from './dto/pet.owner.id.request.dto';
+import { PetOwner } from 'src/models/pet.owner.entity';
 
 @Controller('pets')
 export class PetController {
@@ -41,6 +43,22 @@ export class PetController {
       console.log(error);
       return new ErrorResponse(
         'error occured while adding the category',
+        true,
+        error,
+      );
+    }
+  }
+
+  @Post('/fetch-owner-by-id')
+  async fetchOwnerById(
+    @Body(new ValidationPipe()) dto: FetchPetOwnerIdRequestDTO,
+  ): Promise<SuccessResponse<PetOwner> | ErrorResponse> {
+    try {
+      const petOwner = await this.petService.fetchPetOwnerById(dto.owner_id);
+      return new SuccessResponse(petOwner);
+    } catch (error) {
+      return new ErrorResponse(
+        'error occured while fetching the owner details',
         true,
         error,
       );
